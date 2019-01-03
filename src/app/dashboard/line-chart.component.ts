@@ -23,8 +23,11 @@ export class LineChartComponent implements OnInit {
       let weatherDates = [];
        alldates.forEach((res) => {
         let jsdate = new Date(res * 1000);
-        weatherDates.push(jsdate.toLocaleTimeString('en', { year: 'numeric', month: 'short', day: 'numeric'}))
+        weatherDates.push(jsdate.toLocaleTimeString('en', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit'}))
       })
+
+      console.log(weatherDates);
+
       this.chart = new Chart('canvas', {
         type: 'line',
         data: {
@@ -33,12 +36,14 @@ export class LineChartComponent implements OnInit {
             { 
               data: temp_max,
               borderColor: "#3cba9f",
-              fill: false
+              fill: 'origin'
             },
             { 
               data: temp_min,
               borderColor: "#ffcc00",
-              fill: false
+              backgroundColor: "#cc65fe",
+              fill: false,
+              lineTension: 0
             },
           ]
         },
@@ -48,10 +53,20 @@ export class LineChartComponent implements OnInit {
           },
           scales: {
             xAxes: [{
-              display: true
+              display: true,
+              gridLines: {
+                color: 'rgba(0, 0, 0, 0.3)',
+              },
+              ticks: {
+              }
             }],
             yAxes: [{
-              display: true
+              display: true,
+              gridLines: {
+                color: 'rgba(0, 0, 0, 0.3)'
+              },
+              ticks: {
+              }
             }],
           }
         }
